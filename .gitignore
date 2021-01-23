@@ -1,9 +1,10 @@
 # apay .gitignore
-# derived from templates for:
+# derived from github templates for:
 #  - C
 #  - C++
 #  - CMake
 #  - VisualStudio
+#  - VisualStudioCode
 
 ### our own stuff
 /build/
@@ -480,5 +481,14 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-#visual studio codes
-.vscode/.
+### https://raw.github.com/github/gitignore/218a941be92679ce67d0484547e3e142b2f5f6f0/Global/VisualStudioCode.gitignore
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
