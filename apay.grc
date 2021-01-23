@@ -228,7 +228,7 @@ blocks:
     bus_structure: null
     coordinate: [982, 259]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_char_to_float_0
   id: blocks_char_to_float
   parameters:
@@ -278,7 +278,7 @@ blocks:
     bus_structure: null
     coordinate: [590, 266]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_complex_to_real_0
   id: blocks_complex_to_real
   parameters:
@@ -294,7 +294,7 @@ blocks:
     bus_structure: null
     coordinate: [589, 229]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_float_to_complex_1
   id: blocks_float_to_complex
   parameters:
@@ -326,7 +326,7 @@ blocks:
     bus_structure: null
     coordinate: [949, 423]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_float_to_complex_2_0
   id: blocks_float_to_complex
   parameters:
@@ -342,7 +342,7 @@ blocks:
     bus_structure: null
     coordinate: [1377, 170]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -358,9 +358,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [833, 221]
+    coordinate: [834, 221]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_multiply_xx_0_1
   id: blocks_multiply_xx
   parameters:
@@ -378,7 +378,7 @@ blocks:
     bus_structure: null
     coordinate: [834, 307]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_multiply_xx_2
   id: blocks_multiply_xx
   parameters:
@@ -430,9 +430,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [73, 320]
+    coordinate: [120, 316]
     rotation: 0
-    state: true
+    state: disabled
 - name: blocks_wavfile_sink_0
   id: blocks_wavfile_sink
   parameters:
@@ -440,16 +440,16 @@ blocks:
     alias: ''
     bits_per_sample: '16'
     comment: ''
-    file: /home/david/apay/test-1.wav
+    file: /Users/MaxNoka/Desktop/temp.wav
     nchan: '1'
     samp_rate: samp_rate
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1201, 162]
+    coordinate: [1102, 168]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: channels_channel_model_0
   id: channels_channel_model
   parameters:
@@ -470,7 +470,7 @@ blocks:
     bus_structure: null
     coordinate: [1145, 414]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: digital_constellation_decoder_cb_0
   id: digital_constellation_decoder_cb
   parameters:
@@ -547,6 +547,42 @@ blocks:
     coordinate: [1591, 506]
     rotation: 0
     state: enabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\nimport pmt\nimport\
+      \ base64\n\nclass blk(gr.sync_block):  # other base classes are basic_block,\
+      \ decim_block, interp_block\n    \"\"\"Embedded Python Block example - a simple\
+      \ multiply const\"\"\"\n\n    def __init__(self):  # only default arguments\
+      \ here\n        \"\"\"arguments to this function show up as parameters in GRC\"\
+      \"\"\n        gr.sync_block.__init__(\n            self,\n            name='Embedded\
+      \ Python Block',   # will show up in GRC\n            in_sig=None,\n       \
+      \     out_sig=[np.byte]\n        )\n        self.message_port_register_in(pmt.intern('msg_in'))\n\
+      \        self.set_msg_handler(pmt.intern('msg_in'), self.handle_msg)\n     \
+      \   \n        # if an attribute with the same name as a parameter is found,\n\
+      \        # a callback is registered (properties work, too).\n        self.toSend\
+      \ = np.array([], dtype=np.uint8)\n        \n    def handle_msg(self, msg):\n\
+      \        temp = pmt.symbol_to_string(msg)\n        out = np.frombuffer(base64.binascii.a2b_base64(temp.encode(\"\
+      ascii\")), dtype=np.int8)\n        self.toSend = np.append(self.toSend, out)\n\
+      \n    def work(self, input_items, output_items):\n        toSendSize = self.toSend.size\n\
+      \        if toSendSize == 0:\n            return 0\n        \n        for i,\
+      \ byteToSend in enumerate(self.toSend):\n            output_items[0][i] = byteToSend\n\
+      \        \n        self.toSend = np.array([], dtype=np.int8)\n        return\
+      \ toSendSize\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Embedded Python Block', 'blk', [], [('msg_in', 'message', 1)], [('0',
+      'byte', 1)], 'Embedded Python Block example - a simple multiply const', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [236, 412]
+    rotation: 0
+    state: true
 - name: low_pass_filter_0
   id: low_pass_filter
   parameters:
@@ -857,6 +893,24 @@ blocks:
     bus_structure: null
     coordinate: [1201, 80]
     rotation: 0
+    state: disabled
+- name: zeromq_sub_msg_source_0
+  id: zeromq_sub_msg_source
+  parameters:
+    address: tcp://127.0.0.1:4020
+    affinity: ''
+    alias: ''
+    bind: 'False'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    timeout: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [17, 445]
+    rotation: 0
     state: true
 
 connections:
@@ -889,9 +943,12 @@ connections:
 - [digital_diff_decoder_bb_0, '0', blocks_char_to_float_0_0, '0']
 - [digital_pfb_clock_sync_xxx_0_0, '0', digital_constellation_decoder_cb_0, '0']
 - [digital_pfb_clock_sync_xxx_0_0, '0', qtgui_const_sink_x_1, '1']
+- [epy_block_0, '0', blocks_unpack_k_bits_bb_0, '0']
+- [epy_block_0, '0', digital_constellation_modulator_0, '0']
 - [low_pass_filter_0, '0', digital_pfb_clock_sync_xxx_0_0, '0']
 - [low_pass_filter_0, '0', qtgui_freq_sink_x_0, '1']
 - [wav_source, '0', blocks_float_to_complex_2_0, '0']
+- [zeromq_sub_msg_source_0, out, epy_block_0, msg_in]
 
 metadata:
   file_format: 1
