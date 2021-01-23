@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
-socket.connect("tcp://127.0.0.1:4020") # connect, not bind, the PUB will bind, only 1 can bind
+socket.connect("tcp://127.0.0.1:4030") # connect, not bind, the PUB will bind, only 1 can bind
 socket.setsockopt(zmq.SUBSCRIBE, b'') # subscribe to topic of all (needed or else it won't work)
 
 while True:

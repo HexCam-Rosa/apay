@@ -1102,6 +1102,25 @@ blocks:
     coordinate: [1338, 38]
     rotation: 0
     state: enabled
+- name: zeromq_pub_sink_0
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://127.0.0.1:4030
+    affinity: ''
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [2498, 539]
+    rotation: 0
+    state: true
 - name: zeromq_sub_msg_source_0
   id: zeromq_sub_msg_source
   parameters:
@@ -1150,6 +1169,7 @@ connections:
 - [digital_constellation_modulator_0, '0', blocks_complex_to_real_0, '0']
 - [digital_constellation_modulator_0, '0', qtgui_const_sink_x_1, '0']
 - [digital_diff_decoder_bb_0, '0', blocks_char_to_float_0_0, '0']
+- [digital_diff_decoder_bb_0, '0', zeromq_pub_sink_0, '0']
 - [digital_pfb_clock_sync_xxx_0_0, '0', digital_constellation_decoder_cb_0, '0']
 - [digital_pfb_clock_sync_xxx_0_0, '0', qtgui_const_sink_x_1, '1']
 - [digital_pfb_clock_sync_xxx_0_0, '0', qtgui_const_sink_x_1_0, '0']
