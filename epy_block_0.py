@@ -21,6 +21,7 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
         # if an attribute with the same name as a parameter is found,
         # a callback is registered (properties work, too).
         self.toSend = np.array([], dtype=np.uint8)
+        self.sendIdx = 0
         
     def handle_msg(self, msg):
         temp = pmt.symbol_to_string(msg)
@@ -30,10 +31,15 @@ class blk(gr.sync_block):  # other base classes are basic_block, decim_block, in
     def work(self, input_items, output_items):
         toSendSize = self.toSend.size
         if toSendSize == 0:
+            output_items[0][0] = 80
             return 0
         
-        for i, byteToSend in enumerate(self.toSend):
-            output_items[0][i] = byteToSend
-        
-        self.toSend = np.array([], dtype=np.int8)
-        return toSendSize
+        print("sending stuff now")
+        output_items[0][0] = self.toSend[sendIdx]
+        if sendIdx == toSendSize:
+            sendIdx = 0
+            self.toSend = np.array([], dtype=np.int8)
+        else:
+            sendIdx += 1
+
+        return 1
