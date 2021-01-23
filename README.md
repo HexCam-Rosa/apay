@@ -1,6 +1,5 @@
-#apay
-
-
+apay
+====
 
 ## Building the Hello World project (Check CMake installed)
 
@@ -8,7 +7,7 @@
     cd build
     cmake ..
     make
-    
+
     # Now run it!
     ./src/apay
 
