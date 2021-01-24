@@ -44,6 +44,24 @@ blocks:
     coordinate: [272, 20.0]
     rotation: 0
     state: enabled
+- name: bpsk
+  id: variable_constellation
+  parameters:
+    comment: ''
+    const_points: '[-1-1j, -1+1j, 1+1j, 1-1j]'
+    dims: '1'
+    precision: '8'
+    rot_sym: '4'
+    soft_dec_lut: None
+    sym_map: '[0, 1, 3, 2]'
+    type: bpsk
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1527, 607]
+    rotation: 0
+    state: true
 - name: delay
   id: variable_qtgui_range
   parameters:
@@ -221,7 +239,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '4'
+    value: '8'
   states:
     bus_sink: false
     bus_source: false
@@ -314,7 +332,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [676, 407]
+    coordinate: [685, 411]
     rotation: 0
     state: enabled
 - name: blocks_char_to_float_0_0_0
@@ -351,26 +369,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [728, 478]
-    rotation: 0
-    state: enabled
-- name: blocks_repack_bits_bb_0
-  id: blocks_repack_bits_bb
-  parameters:
-    affinity: ''
-    alias: ''
-    align_output: 'False'
-    comment: ''
-    endianness: gr.GR_LSB_FIRST
-    k: '1'
-    l: '8'
-    len_tag_key: '""'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [696, 734]
     rotation: 0
     state: enabled
 - name: blocks_throttle_0
@@ -566,7 +564,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 260.0]
+    coordinate: [555, 263]
     rotation: 180
     state: enabled
 - name: digital_map_bb_0
@@ -582,7 +580,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [384, 260.0]
+    coordinate: [370, 264]
     rotation: 180
     state: enabled
 - name: digital_pfb_clock_sync_xxx_0
@@ -612,24 +610,28 @@ blocks:
   id: epy_block
   parameters:
     _source_code: "import numpy as np\nfrom gnuradio import gr\n\nimport pmt\nimport\
-      \ base64\n\nclass blk(gr.sync_block):  # other base classes are basic_block,\
+      \ base64\n\n\nclass blk(\n    gr.sync_block\n):  # other base classes are basic_block,\
       \ decim_block, interp_block\n    \"\"\"Embedded Python Block example - a simple\
       \ multiply const\"\"\"\n\n    def __init__(self):  # only default arguments\
       \ here\n        \"\"\"arguments to this function show up as parameters in GRC\"\
-      \"\"\n        gr.sync_block.__init__(\n            self,\n            name='Embedded\
-      \ Python Block',   # will show up in GRC\n            in_sig=None,\n       \
-      \     out_sig=[np.byte]\n        )\n        self.message_port_register_in(pmt.intern('msg_in'))\n\
-      \        self.set_msg_handler(pmt.intern('msg_in'), self.handle_msg)\n     \
-      \   \n        # if an attribute with the same name as a parameter is found,\n\
-      \        # a callback is registered (properties work, too).\n        self.toSend\
-      \ = np.array([], dtype=np.uint8)\n        \n    def handle_msg(self, msg):\n\
-      \        temp = pmt.symbol_to_string(msg)\n        out = np.frombuffer(base64.binascii.a2b_base64(temp.encode(\"\
-      ascii\")), dtype=np.int8)\n        self.toSend = np.append(self.toSend, out)\n\
-      \n    def work(self, input_items, output_items):\n        toSendSize = self.toSend.size\n\
-      \        if toSendSize == 0:\n            return 0\n        \n        for i,\
-      \ byteToSend in enumerate(self.toSend):\n            output_items[0][i] = byteToSend\n\
-      \        \n        self.toSend = np.array([], dtype=np.int8)\n        return\
-      \ toSendSize\n"
+      \"\"\n        gr.sync_block.__init__(\n            self,\n            name=\"\
+      Embedded Python Block\",  # will show up in GRC\n            in_sig=None,\n\
+      \            out_sig=[np.ubyte],\n        )\n        self.message_port_register_in(pmt.intern(\"\
+      msg_in\"))\n        self.set_msg_handler(pmt.intern(\"msg_in\"), self.handle_msg)\n\
+      \n        # if an attribute with the same name as a parameter is found,\n  \
+      \      # a callback is registered (properties work, too).\n        # self.toSend\
+      \ = np.array([], dtype=np.uint8)\n        self.toSend = []\n\n    def handle_msg(self,\
+      \ msg):\n        # temp = pmt.symbol_to_string(msg)\n        # print(temp)\n\
+      \        # out = np.frombuffer(\n        #     base64.binascii.a2b_base64(temp.encode(\"\
+      ascii\")), dtype=np.ubyte\n        # )\n        # self.toSend = np.append(self.toSend,\
+      \ out)\n        t = pmt.to_python(msg)\n        try:\n            self.toSend.extend(t)\n\
+      \        except TypeError:\n            self.toSend = t\n\n    def work(self,\
+      \ input_items, output_items):\n        try:\n            toSendSize = len(self.toSend)\n\
+      \        except TypeError:\n            toSendSize = 0\n        if toSendSize\
+      \ == 0:\n            return 0\n\n        for i, byteToSend in enumerate(self.toSend):\n\
+      \            output_items[0][i] = byteToSend\n            # for x in range(8):\n\
+      \            #     output_items[0][x + i * 8] = (byteToSend >> x) & 1\n    \
+      \        print(byteToSend)\n\n        self.toSend = []\n        return toSendSize\n"
     affinity: ''
     alias: ''
     comment: ''
@@ -641,7 +643,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [57, 719]
+    coordinate: [109, 756]
     rotation: 0
     state: enabled
 - name: qtgui_const_sink_x_0
@@ -980,7 +982,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [966, 670]
+    coordinate: [1031, 684]
     rotation: 0
     state: true
 - name: zeromq_sub_msg_source_0
@@ -1007,11 +1009,10 @@ connections:
 - [blocks_char_to_float_0_0, '0', qtgui_time_sink_x_0_0, '0']
 - [blocks_char_to_float_0_0_0, '0', blocks_delay_0, '0']
 - [blocks_delay_0, '0', qtgui_time_sink_x_0_0, '1']
-- [blocks_repack_bits_bb_0, '0', zeromq_pub_sink_0, '0']
 - [blocks_throttle_0, '0', channels_channel_model_0, '0']
 - [blocks_unpack_k_bits_bb_0, '0', blocks_char_to_float_0_0, '0']
+- [blocks_unpack_k_bits_bb_0, '0', zeromq_pub_sink_0, '0']
 - [blocks_unpack_k_bits_bb_0_0, '0', blocks_char_to_float_0_0_0, '0']
-- [blocks_unpack_k_bits_bb_0_0, '0', blocks_repack_bits_bb_0, '0']
 - [channels_channel_model_0, '0', digital_pfb_clock_sync_xxx_0, '0']
 - [digital_cma_equalizer_cc_0, '0', digital_costas_loop_cc_0, '0']
 - [digital_constellation_decoder_cb_0, '0', blocks_char_to_float_0, '0']
