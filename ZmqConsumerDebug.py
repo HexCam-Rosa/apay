@@ -18,8 +18,10 @@ while True:
     if socket.poll(10) != 0: # check if there is a message on the socket
         msg = socket.recv() # grab the message
         print(len(msg)) # size of msg
-        data = np.frombuffer(msg, dtype=np.uint8, count=-1) # make sure to use correct data type (complex64 or float32); '-1' means read all data in the buffer
-        print(data[0:10])
+        data = np.frombuffer(msg, dtype=np.int8, count=-1) # make sure to use correct data type (complex64 or float32); '-1' means read all data in the buffer
+        print(data[0:8])
+        print(data)
+        print([x>>1 for x in data])
         # plt.plot(np.real(data))
         # plt.plot(np.imag(data))
         # plt.show()
