@@ -312,9 +312,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 100.0]
+    coordinate: [1333, 332]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: analog_sig_source_x_0
   id: analog_sig_source_x
   parameters:
@@ -724,7 +724,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 100.0]
+    coordinate: [212, 84]
     rotation: 0
     state: enabled
 - name: digital_costas_loop_cc_0
@@ -1144,10 +1144,56 @@ blocks:
     coordinate: [424, 532.0]
     rotation: 0
     state: enabled
+- name: virtual_sink_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1571, 293]
+    rotation: 0
+    state: true
+- name: virtual_source_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [34, 128]
+    rotation: 0
+    state: true
+- name: zeromq_sub_source_0
+  id: zeromq_sub_source
+  parameters:
+    address: tcp://127.0.0.1:4020
+    affinity: ''
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1338, 255]
+    rotation: 0
+    state: enabled
 
 connections:
-- [analog_random_source_x_0, '0', blocks_unpack_k_bits_bb_0_0, '0']
-- [analog_random_source_x_0, '0', digital_constellation_modulator_0, '0']
+- [analog_random_source_x_0, '0', virtual_sink_1, '0']
 - [analog_sig_source_x_0, '0', blocks_float_to_complex_1, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '1']
 - [analog_sig_source_x_0_0, '0', blocks_float_to_complex_1, '1']
@@ -1179,6 +1225,9 @@ connections:
 - [digital_map_bb_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [digital_pfb_clock_sync_xxx_0, '0', digital_cma_equalizer_cc_0, '0']
 - [low_pass_filter_0, '0', digital_pfb_clock_sync_xxx_0, '0']
+- [virtual_source_0, '0', blocks_unpack_k_bits_bb_0_0, '0']
+- [virtual_source_0, '0', digital_constellation_modulator_0, '0']
+- [zeromq_sub_source_0, '0', virtual_sink_1, '0']
 
 metadata:
   file_format: 1
