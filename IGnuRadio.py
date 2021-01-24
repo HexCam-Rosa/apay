@@ -13,7 +13,22 @@ socket = context.socket(zmq.PUB)
 socket.bind("tcp://127.0.0.1:%s" % port)
 
 #while True:
+
+stringToSend = "Hello World"
+stringToSend = "Hd"
+bytestoSend = [ord(c) for c in stringToSend]
+
+bits_to_send = []
+for byteToSend in bytestoSend:
+    for i in range(8):
+        theBit = (byteToSend >> (7 - i)) & 1
+        bits_to_send.append(theBit)
+
+print(bits_to_send)
+
+
 for i in range(100):
+    # continue
     #topic = np.random.random_integers(0,1, 100).astype(np.int8)
     #topic = np.random.random_integers(-128,127, 100).astype(np.int8)
     #topic = np.random.random_integers(5,5, 100).astype(np.int8)
@@ -27,6 +42,7 @@ for i in range(100):
     # a = np.random.choice([0, 1], 100)
     # a = np.ones(100)
     a = np.array([1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0])
+    a = np.append(a, np.array(bits_to_send))
     #a = [3,1,0,2,3,2,1]
     socket.send(pmt.serialize_str(pmt.to_pmt(a)))
     #print(pmt.to_pmt(a))
