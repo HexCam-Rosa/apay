@@ -50,7 +50,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1207, 594]
+    coordinate: [1333, 754]
     rotation: 0
     state: enabled
 - name: samp_rate
@@ -65,18 +65,6 @@ blocks:
     coordinate: [184, 12]
     rotation: 0
     state: enabled
-- name: sps
-  id: variable
-  parameters:
-    comment: ''
-    value: samp_rate//100
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [504, 23]
-    rotation: 0
-    state: true
 - name: taps
   id: variable_low_pass_filter_taps
   parameters:
@@ -91,7 +79,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1199, 444]
+    coordinate: [1231, 472]
     rotation: 0
     state: true
 - name: analog_const_source_x_0
@@ -108,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [447, 318]
+    coordinate: [439, 309]
     rotation: 0
     state: enabled
 - name: analog_quadrature_demod_cf_0
@@ -124,7 +112,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1476, 396]
+    coordinate: [1479, 407]
     rotation: 0
     state: true
 - name: analog_random_source_x_0
@@ -154,11 +142,7 @@ blocks:
     alias: ''
     amp: '1'
     comment: ''
-<<<<<<< Updated upstream
     freq: '4000'
-=======
-    freq: 4*sps
->>>>>>> Stashed changes
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -180,11 +164,7 @@ blocks:
     alias: ''
     amp: '1'
     comment: ''
-<<<<<<< Updated upstream
     freq: '3000'
-=======
-    freq: 2*sps
->>>>>>> Stashed changes
     maxoutbuf: '0'
     minoutbuf: '0'
     offset: '0'
@@ -196,43 +176,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [545, 462]
-    rotation: 0
-    state: true
-- name: audio_sink_0
-  id: audio_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    device_name: ''
-    num_inputs: '1'
-    ok_to_block: 'True'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1050, 260]
-    rotation: 0
-    state: true
-- name: audio_source_0
-  id: audio_source
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    device_name: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_outputs: '1'
-    ok_to_block: 'True'
-    samp_rate: samp_rate
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [911, 416]
+    coordinate: [393, 455]
     rotation: 0
     state: enabled
 - name: audio_source_0
@@ -269,7 +213,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [872, 247]
+    coordinate: [1004, 263]
     rotation: 0
     state: enabled
 - name: blocks_char_to_float_0
@@ -288,26 +232,6 @@ blocks:
     bus_structure: null
     coordinate: [504, 217]
     rotation: 0
-<<<<<<< Updated upstream
-=======
-    state: true
-- name: blocks_char_to_float_0_0
-  id: blocks_char_to_float
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    scale: '1'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [248, 320]
-    rotation: 0
->>>>>>> Stashed changes
     state: enabled
 - name: blocks_char_to_float_1
   id: blocks_char_to_float
@@ -323,10 +247,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1488, 493]
+    coordinate: [1494, 521]
     rotation: 0
-    state: enabled
-- name: blocks_delay_0_0
+    state: true
+- name: blocks_delay_0
   id: blocks_delay
   parameters:
     affinity: ''
@@ -342,28 +266,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1689, 474]
+    coordinate: [1330, 688]
     rotation: 0
     state: enabled
-<<<<<<< Updated upstream
-=======
-- name: blocks_float_to_complex_0
-  id: blocks_float_to_complex
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1239, 239]
-    rotation: 0
-    state: disabled
->>>>>>> Stashed changes
 - name: blocks_multiply_xx_0
   id: blocks_multiply_xx
   parameters:
@@ -397,11 +302,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-<<<<<<< Updated upstream
     coordinate: [809, 479]
-=======
-    coordinate: [765, 400]
->>>>>>> Stashed changes
     rotation: 0
     state: enabled
 - name: blocks_repeat_0
@@ -410,7 +311,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    interp: sps
+    interp: '100'
     maxoutbuf: '0'
     minoutbuf: '0'
     type: byte
@@ -437,33 +338,26 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [658, 312]
+    coordinate: [686, 372]
     rotation: 0
-<<<<<<< Updated upstream
     state: enabled
 - name: blocks_throttle_0
   id: blocks_throttle
-=======
-    state: true
-- name: blocks_vector_source_x_0
-  id: blocks_vector_source_x
->>>>>>> Stashed changes
   parameters:
     affinity: ''
     alias: ''
     comment: ''
+    ignoretag: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    repeat: 'True'
-    tags: '[]'
-    type: byte
-    vector: (1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1)
+    samples_per_second: samp_rate
+    type: float
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [31, 280]
+    coordinate: [1181, 149]
     rotation: 0
     state: enabled
 - name: blocks_unpack_k_bits_bb_0
@@ -549,9 +443,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1492, 449]
+    coordinate: [1497, 475]
     rotation: 180
-<<<<<<< Updated upstream
     state: true
 - name: epy_block_0
   id: epy_block
@@ -592,19 +485,13 @@ blocks:
     bus_structure: null
     coordinate: [203, 643]
     rotation: 0
-=======
->>>>>>> Stashed changes
     state: enabled
 - name: filter_0
   id: freq_xlating_fir_filter_xxx
   parameters:
     affinity: ''
     alias: ''
-<<<<<<< Updated upstream
     center_freq: '3500'
-=======
-    center_freq: 3*sps
->>>>>>> Stashed changes
     comment: ''
     decim: '1'
     maxoutbuf: '0'
@@ -616,28 +503,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1198, 351]
+    coordinate: [1213, 335]
     rotation: 0
     state: true
-- name: fir_filter_xxx_0_0
-  id: fir_filter_xxx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    decim: sps
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samp_delay: '0'
-    taps: '1'
-    type: fff
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1677, 537]
-    rotation: 0
-    state: enabled
 - name: qtgui_freq_sink_x_0
   id: qtgui_freq_sink_x
   parameters:
@@ -715,306 +583,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1565, 46]
+    coordinate: [1531, 163]
     rotation: 0
-    state: disabled
-- name: qtgui_time_sink_x_0_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: Sent
-    nconnections: '1'
-    size: 1024*10//100
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '4'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [311, 362]
-    rotation: 0
-    state: enabled
-- name: qtgui_time_sink_x_0_0_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: Rx
-    nconnections: '1'
-    size: 1024*10
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '4'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1627, 631]
-    rotation: 0
-    state: enabled
-- name: qtgui_time_sink_x_0_0_0_0
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: Rx
-    nconnections: '1'
-    size: 1024*10//100
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '4'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1898, 445]
-    rotation: 0
-<<<<<<< Updated upstream
     state: disabled
 - name: qtgui_time_sink_x_0
-=======
-    state: true
-- name: qtgui_time_sink_x_0_0_0_1
->>>>>>> Stashed changes
   id: qtgui_time_sink_x
   parameters:
     affinity: ''
@@ -1067,7 +639,6 @@ blocks:
     marker7: '-1'
     marker8: '-1'
     marker9: '-1'
-<<<<<<< Updated upstream
     name: '""'
     nconnections: '2'
     size: '5096'
@@ -1168,11 +739,6 @@ blocks:
     name: '""'
     nconnections: '1'
     size: '1024'
-=======
-    name: pre slice
-    nconnections: '1'
-    size: 1024*10
->>>>>>> Stashed changes
     srate: samp_rate
     stemplot: 'False'
     style1: '1'
@@ -1204,103 +770,6 @@ blocks:
     width8: '1'
     width9: '1'
     ylabel: Amplitude
-    ymax: '4'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1750, 304]
-    rotation: 0
-    state: disabled
-- name: qtgui_time_sink_x_1
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '-1'
-    marker10: '-1'
-    marker2: '-1'
-    marker3: '-1'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: yeet
-    nconnections: '1'
-    size: '1024'
-    srate: samp_rate
-    stemplot: 'False'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: complex
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
     ymax: '1'
     ymin: '-1'
     yunit: '""'
@@ -1308,7 +777,6 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-<<<<<<< Updated upstream
     coordinate: [1635, 717]
     rotation: 0
     state: disabled
@@ -1349,20 +817,13 @@ blocks:
     coordinate: [203, 743]
     rotation: 0
     state: enabled
-=======
-    coordinate: [1661, 197]
-    rotation: 0
-    state: true
->>>>>>> Stashed changes
 
 connections:
 - [analog_const_source_x_0, '0', blocks_sub_xx_0, '0']
 - [analog_quadrature_demod_cf_0, '0', digital_binary_slicer_fb_0, '0']
-- [analog_quadrature_demod_cf_0, '0', qtgui_time_sink_x_0_0_0_1, '0']
 - [analog_random_source_x_0, '0', blocks_repeat_0, '0']
 - [analog_sig_source_x_0, '0', blocks_multiply_xx_0, '0']
 - [analog_sig_source_x_0_0, '0', blocks_multiply_xx_0_0, '1']
-<<<<<<< Updated upstream
 - [audio_source_0, '0', filter_0, '0']
 - [audio_source_0, '0', qtgui_freq_sink_x_0, '1']
 - [blocks_add_xx_0, '0', blocks_throttle_0, '0']
@@ -1373,43 +834,20 @@ connections:
 - [blocks_char_to_float_1, '0', qtgui_time_sink_x_0, '1']
 - [blocks_char_to_float_1, '0', qtgui_time_sink_x_1, '0']
 - [blocks_delay_0, '0', qtgui_time_sink_x_0, '0']
-=======
-- [audio_source_0, '0', blocks_float_to_complex_0, '0']
-- [audio_source_0, '0', filter_0, '0']
-- [blocks_add_xx_0, '0', audio_sink_0, '0']
-- [blocks_char_to_float_0, '0', blocks_multiply_xx_0, '1']
-- [blocks_char_to_float_0, '0', blocks_sub_xx_0, '1']
-- [blocks_char_to_float_0_0, '0', qtgui_time_sink_x_0_0, '0']
-- [blocks_char_to_float_1, '0', blocks_delay_0_0, '0']
-- [blocks_char_to_float_1, '0', qtgui_time_sink_x_0_0_0, '0']
-- [blocks_delay_0_0, '0', fir_filter_xxx_0_0, '0']
-- [blocks_float_to_complex_0, '0', qtgui_freq_sink_x_0, '1']
->>>>>>> Stashed changes
 - [blocks_multiply_xx_0, '0', blocks_add_xx_0, '0']
 - [blocks_multiply_xx_0_0, '0', blocks_add_xx_0, '1']
 - [blocks_repeat_0, '0', blocks_char_to_float_0, '0']
 - [blocks_sub_xx_0, '0', blocks_multiply_xx_0_0, '0']
-<<<<<<< Updated upstream
 - [blocks_throttle_0, '0', filter_0, '0']
 - [blocks_throttle_0, '0', qtgui_freq_sink_x_0, '0']
 - [blocks_unpack_k_bits_bb_0, '0', blocks_repeat_0, '0']
 - [blocks_vector_source_x_1, '0', blocks_unpack_k_bits_bb_0, '0']
 - [blocks_wavfile_source_0, '0', filter_0, '0']
-=======
-- [blocks_vector_source_x_0, '0', blocks_char_to_float_0_0, '0']
-- [blocks_vector_source_x_0, '0', blocks_repeat_0, '0']
->>>>>>> Stashed changes
 - [digital_binary_slicer_fb_0, '0', blocks_char_to_float_1, '0']
 - [digital_binary_slicer_fb_0, '0', zeromq_pub_sink_0, '0']
 - [epy_block_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [filter_0, '0', analog_quadrature_demod_cf_0, '0']
-<<<<<<< Updated upstream
 - [zeromq_sub_msg_source_0, out, epy_block_0, msg_in]
-=======
-- [filter_0, '0', qtgui_freq_sink_x_0, '0']
-- [filter_0, '0', qtgui_time_sink_x_1, '0']
-- [fir_filter_xxx_0_0, '0', qtgui_time_sink_x_0_0_0_0, '0']
->>>>>>> Stashed changes
 
 metadata:
   file_format: 1
