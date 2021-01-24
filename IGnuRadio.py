@@ -12,8 +12,8 @@ context = zmq.Context()
 socket = context.socket(zmq.PUB)
 socket.bind("tcp://127.0.0.1:%s" % port)
 
-while True:
-#for i in range(5):
+#while True:
+for i in range(5):
     #topic = np.random.random_integers(0,1, 100).astype(np.int8)
     #topic = np.random.random_integers(-128,127, 100).astype(np.int8)
     #topic = np.random.random_integers(5,5, 100).astype(np.int8)

@@ -98,7 +98,7 @@ blocks:
     bus_structure: null
     coordinate: [439, 309]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: analog_quadrature_demod_cf_0
   id: analog_quadrature_demod_cf
   parameters:
@@ -156,7 +156,7 @@ blocks:
     bus_structure: null
     coordinate: [271, 58]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: analog_sig_source_x_0_0
   id: analog_sig_source_x
   parameters:
@@ -178,7 +178,7 @@ blocks:
     bus_structure: null
     coordinate: [393, 455]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: audio_source_0
   id: audio_source
   parameters:
@@ -197,7 +197,7 @@ blocks:
     bus_structure: null
     coordinate: [950, 778]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_add_xx_0
   id: blocks_add_xx
   parameters:
@@ -215,7 +215,7 @@ blocks:
     bus_structure: null
     coordinate: [1004, 263]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_char_to_float_0
   id: blocks_char_to_float
   parameters:
@@ -286,7 +286,7 @@ blocks:
     bus_structure: null
     coordinate: [732, 114]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_multiply_xx_0_0
   id: blocks_multiply_xx
   parameters:
@@ -304,7 +304,7 @@ blocks:
     bus_structure: null
     coordinate: [809, 479]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_repeat_0
   id: blocks_repeat
   parameters:
@@ -340,7 +340,7 @@ blocks:
     bus_structure: null
     coordinate: [686, 372]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_throttle_0
   id: blocks_throttle
   parameters:
@@ -359,7 +359,7 @@ blocks:
     bus_structure: null
     coordinate: [1181, 149]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: blocks_unpack_k_bits_bb_0
   id: blocks_unpack_k_bits_bb
   parameters:
@@ -395,7 +395,7 @@ blocks:
     bus_structure: null
     coordinate: [46, 412]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_wavfile_sink_0
   id: blocks_wavfile_sink
   parameters:
@@ -446,6 +446,46 @@ blocks:
     coordinate: [1497, 475]
     rotation: 180
     state: true
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "import numpy as np\nfrom gnuradio import gr\n\nimport pmt\nimport\
+      \ base64\n\n\nclass blk(\n    gr.sync_block\n):  # other base classes are basic_block,\
+      \ decim_block, interp_block\n    \"\"\"Embedded Python Block example - a simple\
+      \ multiply const\"\"\"\n\n    def __init__(self):  # only default arguments\
+      \ here\n        \"\"\"arguments to this function show up as parameters in GRC\"\
+      \"\"\n        gr.sync_block.__init__(\n            self,\n            name=\"\
+      Embedded Python Block\",  # will show up in GRC\n            in_sig=None,\n\
+      \            out_sig=[np.ubyte],\n        )\n        self.message_port_register_in(pmt.intern(\"\
+      msg_in\"))\n        self.set_msg_handler(pmt.intern(\"msg_in\"), self.handle_msg)\n\
+      \n        # if an attribute with the same name as a parameter is found,\n  \
+      \      # a callback is registered (properties work, too).\n        # self.toSend\
+      \ = np.array([], dtype=np.uint8)\n        self.toSend = []\n\n    def handle_msg(self,\
+      \ msg):\n        # temp = pmt.symbol_to_string(msg)\n        # print(temp)\n\
+      \        # out = np.frombuffer(\n        #     base64.binascii.a2b_base64(temp.encode(\"\
+      ascii\")), dtype=np.ubyte\n        # )\n        # self.toSend = np.append(self.toSend,\
+      \ out)\n        t = pmt.to_python(msg)\n        try:\n            self.toSend.extend(t)\n\
+      \        except TypeError:\n            self.toSend = t\n\n    def work(self,\
+      \ input_items, output_items):\n        try:\n            toSendSize = len(self.toSend)\n\
+      \        except TypeError:\n            toSendSize = 0\n        if toSendSize\
+      \ == 0:\n            return 0\n\n        for i, byteToSend in enumerate(self.toSend):\n\
+      \            output_items[0][i] = byteToSend\n            # for x in range(8):\n\
+      \            #     output_items[0][x + i * 8] = (byteToSend >> x) & 1\n    \
+      \        # print(byteToSend)\n\n        self.toSend = []\n        return toSendSize\n"
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    _io_cache: ('Embedded Python Block', 'blk', [], [('msg_in', 'message', 1)], [('0',
+      'byte', 1)], 'Embedded Python Block example - a simple multiply const', [])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [203, 643]
+    rotation: 0
+    state: enabled
 - name: filter_0
   id: freq_xlating_fir_filter_xxx
   parameters:
@@ -740,6 +780,43 @@ blocks:
     coordinate: [1635, 717]
     rotation: 0
     state: disabled
+- name: zeromq_pub_sink_0
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://127.0.0.1:4030
+    affinity: ''
+    alias: ''
+    comment: ''
+    hwm: '-1'
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1516, 832]
+    rotation: 0
+    state: enabled
+- name: zeromq_sub_msg_source_0
+  id: zeromq_sub_msg_source
+  parameters:
+    address: tcp://127.0.0.1:4020
+    affinity: ''
+    alias: ''
+    bind: 'False'
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    timeout: '100'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [203, 743]
+    rotation: 0
+    state: enabled
 
 connections:
 - [analog_const_source_x_0, '0', blocks_sub_xx_0, '0']
@@ -767,7 +844,10 @@ connections:
 - [blocks_vector_source_x_1, '0', blocks_unpack_k_bits_bb_0, '0']
 - [blocks_wavfile_source_0, '0', filter_0, '0']
 - [digital_binary_slicer_fb_0, '0', blocks_char_to_float_1, '0']
+- [digital_binary_slicer_fb_0, '0', zeromq_pub_sink_0, '0']
+- [epy_block_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [filter_0, '0', analog_quadrature_demod_cf_0, '0']
+- [zeromq_sub_msg_source_0, out, epy_block_0, msg_in]
 
 metadata:
   file_format: 1

@@ -51,7 +51,7 @@ class blk(
             output_items[0][i] = byteToSend
             # for x in range(8):
             #     output_items[0][x + i * 8] = (byteToSend >> x) & 1
-            print(byteToSend)
+            # print(byteToSend)
 
         self.toSend = []
         return toSendSize
