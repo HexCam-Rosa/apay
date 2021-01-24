@@ -264,7 +264,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [418, 448]
+    coordinate: [418, 450]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0_0
@@ -547,6 +547,43 @@ blocks:
     coordinate: [1205, 622]
     rotation: 0
     state: enabled
+- name: blocks_sub_xx_0
+  id: blocks_sub_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1963, 1237]
+    rotation: 0
+    state: true
+- name: blocks_throttle_0
+  id: blocks_throttle
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    ignoretag: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samples_per_second: samp_rate
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1382, 681]
+    rotation: 0
+    state: true
 - name: blocks_unpack_k_bits_bb_0
   id: blocks_unpack_k_bits_bb
   parameters:
@@ -668,7 +705,7 @@ blocks:
     bus_structure: null
     coordinate: [1129, 439]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: digital_cma_equalizer_cc_0
   id: digital_cma_equalizer_cc
   parameters:
@@ -823,7 +860,7 @@ blocks:
     max_dev: '1.5'
     maxoutbuf: '0'
     minoutbuf: '0'
-    osps: '2'
+    osps: '1'
     sps: sps
     taps: rrc_taps
     type: ccf
@@ -927,7 +964,7 @@ blocks:
     alias: ''
     beta: '6.76'
     comment: ''
-    cutoff_freq: (samp_rate//sps)
+    cutoff_freq: (samp_rate//(sps-1))
     decim: '1'
     gain: '1'
     interp: '1'
@@ -1033,7 +1070,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2050, 91]
+    coordinate: [2049, 91]
     rotation: 0
     state: disabled
 - name: qtgui_const_sink_x_1_0
@@ -1125,9 +1162,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1991, 1120]
+    coordinate: [1982, 835]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_freq_sink_x_0
   id: qtgui_freq_sink_x
   parameters:
@@ -1205,7 +1242,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1789, 285]
+    coordinate: [1846, 236]
     rotation: 0
     state: disabled
 - name: qtgui_freq_sink_x_1
@@ -1285,9 +1322,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2286, 1083]
+    coordinate: [2034, 1095]
     rotation: 0
-    state: true
+    state: enabled
 - name: qtgui_freq_sink_x_1_0
   id: qtgui_freq_sink_x
   parameters:
@@ -1367,7 +1404,7 @@ blocks:
     bus_structure: null
     coordinate: [494, 932]
     rotation: 0
-    state: true
+    state: enabled
 - name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
@@ -1422,7 +1459,7 @@ blocks:
     marker8: '-1'
     marker9: '-1'
     name: '""'
-    nconnections: '2'
+    nconnections: '1'
     size: '128'
     srate: samp_rate
     stemplot: 'False'
@@ -1462,7 +1499,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [2012, 1207]
+    coordinate: [2179, 1228]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_1
@@ -1728,17 +1765,20 @@ connections:
 - [blocks_char_to_float_0, '0', qtgui_time_sink_x_1, '1']
 - [blocks_char_to_float_0_0, '0', qtgui_time_sink_x_1, '0']
 - [blocks_char_to_float_0_0, '0', qtgui_time_sink_x_1_0, '0']
-- [blocks_char_to_float_0_0_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_char_to_float_0_0_0, '0', blocks_sub_xx_0, '1']
 - [blocks_char_to_float_0_0_0_0, '0', blocks_delay_0, '0']
 - [blocks_complex_to_imag_0, '0', blocks_multiply_xx_0_1, '0']
 - [blocks_complex_to_real_0, '0', blocks_multiply_xx_0, '0']
-- [blocks_delay_0, '0', qtgui_time_sink_x_0, '1']
+- [blocks_delay_0, '0', blocks_sub_xx_0, '0']
 - [blocks_float_to_complex_1, '0', blocks_multiply_xx_2, '1']
+- [blocks_float_to_complex_2, '0', blocks_multiply_xx_2, '0']
 - [blocks_float_to_complex_2, '0', channels_channel_model_0, '0']
 - [blocks_float_to_complex_2_0, '0', blocks_multiply_xx_2, '0']
 - [blocks_multiply_xx_0, '0', blocks_add_xx_0, '0']
 - [blocks_multiply_xx_0_1, '0', blocks_add_xx_0, '1']
-- [blocks_multiply_xx_2, '0', low_pass_filter_0, '0']
+- [blocks_multiply_xx_2, '0', blocks_throttle_0, '0']
+- [blocks_sub_xx_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_throttle_0, '0', low_pass_filter_0, '0']
 - [blocks_unpack_k_bits_bb_0, '0', blocks_char_to_float_0, '0']
 - [blocks_unpack_k_bits_bb_0_0, '0', blocks_char_to_float_0_0, '0']
 - [blocks_unpack_k_bits_bb_0_0, '0', blocks_char_to_float_0_0_0, '0']
@@ -1758,14 +1798,13 @@ connections:
 - [digital_constellation_modulator_0, '0', qtgui_freq_sink_x_1_0, '0']
 - [digital_constellation_receiver_cb_0, '0', digital_map_bb_0_0, '0']
 - [digital_costas_loop_cc_0, '0', digital_constellation_decoder_cb_0_0, '0']
-- [digital_costas_loop_cc_0, '0', qtgui_const_sink_x_1, '1']
 - [digital_costas_loop_cc_0, '0', qtgui_const_sink_x_1_0, '0']
 - [digital_costas_loop_cc_0, '0', qtgui_freq_sink_x_0, '1']
-- [digital_costas_loop_cc_0, '0', qtgui_freq_sink_x_1, '0']
 - [digital_diff_decoder_bb_0_0, '0', digital_map_bb_0, '0']
 - [digital_map_bb_0, '0', blocks_unpack_k_bits_bb_0_0, '0']
 - [digital_map_bb_0_0, '0', blocks_unpack_k_bits_bb_0_0_1, '0']
 - [digital_pfb_clock_sync_xxx_0, '0', digital_cma_equalizer_cc_0, '0']
+- [digital_pfb_clock_sync_xxx_0, '0', qtgui_freq_sink_x_0, '1']
 - [digital_symbol_sync_xx_0, '0', qtgui_const_sink_x_1_0, '0']
 - [digital_symbol_sync_xx_0, '0', qtgui_freq_sink_x_1, '0']
 - [epy_block_0, '0', blocks_unpack_k_bits_bb_0, '0']
@@ -1775,6 +1814,7 @@ connections:
 - [low_pass_filter_0, '0', digital_constellation_receiver_cb_0, '0']
 - [low_pass_filter_0, '0', digital_pfb_clock_sync_xxx_0, '0']
 - [low_pass_filter_0, '0', fir_filter_xxx_0, '0']
+- [low_pass_filter_0, '0', qtgui_freq_sink_x_1, '0']
 - [wav_source, '0', blocks_float_to_complex_2_0, '0']
 - [zeromq_sub_msg_source_0, out, epy_block_0, msg_in]
 
